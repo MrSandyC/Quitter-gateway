@@ -8,13 +8,14 @@ export class AppService {
   constructor(
     @Inject('Queet-service') private readonly queetClient: ClientProxy,
   ) {}
-  getHello(): string {
-    return 'Hello World!';
+  async getHello() {
+    const message = await this.queetClient.send('post-queet', 'username');
+    return message;
   }
 
   postQueet(postQueetRequest: PostQueetRequest) {
     this.queetClient.emit(
-      'post-queet',
+      'hello-world',
       new PostQueetEvent(postQueetRequest.message),
     );
   }
