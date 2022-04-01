@@ -11,7 +11,6 @@ export class QueetController {
 
   @Post()
   async create(@Payload() createQueetDto: PostQueetRequest) {
-    console.log('got here');
     return this.queetService.create(createQueetDto);
   }
 
