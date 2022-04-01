@@ -7,8 +7,8 @@ export class QueetService {
   constructor(
     @Inject('Queet-service') private readonly queetClient: ClientProxy,
   ) {}
-  create(postQueetRequest: PostQueetRequest) {
-    return this.queetClient.emit('queet:post-new', postQueetRequest);
+  async create(postQueetRequest: PostQueetRequest) {
+    return await this.queetClient.emit('queet:post-new', postQueetRequest);
   }
 
   async findAll() {

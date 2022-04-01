@@ -3,13 +3,15 @@ import { Payload } from '@nestjs/microservices';
 import { QueetService } from './queet.service';
 import { PostQueetRequest } from './dto/create-queet.dto';
 import { Observable } from 'rxjs';
+import { Queet } from './entities/queet.entity';
 
 @Controller('queet')
 export class QueetController {
   constructor(private readonly queetService: QueetService) {}
 
   @Post()
-  create(@Payload() createQueetDto: PostQueetRequest): Observable<string> {
+  async create(@Payload() createQueetDto: PostQueetRequest) {
+    console.log('got here');
     return this.queetService.create(createQueetDto);
   }
 
