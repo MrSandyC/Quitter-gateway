@@ -13,6 +13,13 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
           port: 5002,
         },
       },
+      {
+        name: 'Queet-service',
+        transport: Transport.TCP,
+        options: {
+          port: 5001,
+        },
+      },
     ]),
   ],
   controllers: [UserController],
