@@ -20,6 +20,6 @@ export class QueetService {
   }
 
   fetchByProfile(id: number) {
-    return this.queetClient.emit('queet:find-by-userid', id);
+    return this.queetClient.send('queet:find-by-userid', id);
   }
 }

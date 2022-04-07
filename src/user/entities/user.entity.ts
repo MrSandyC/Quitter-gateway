@@ -1,3 +1,5 @@
+import { Queet } from 'src/queet/entities/queet.entity';
+
 export class User {
   id: number;
   auth0id: string;
@@ -6,4 +8,5 @@ export class User {
   location: string;
   username: string;
   profileUri: string;
+  queets: Queet[];
 }

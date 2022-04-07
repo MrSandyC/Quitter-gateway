@@ -34,4 +34,8 @@ export class UserService {
   updateUser(updateUserDto: UpdateUserDto) {
     return this.userClient.emit('user:update', updateUserDto);
   }
+
+  fetchUserByUsername(username: string) {
+    return this.userClient.send('user:fetch-by-username', username);
+  }
 }

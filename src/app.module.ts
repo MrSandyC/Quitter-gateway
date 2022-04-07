@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { QueetModule } from './queet/queet.module';
 import { UserModule } from './user/user.module';
 import { AuthzModule } from './authz/authz.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { AuthzModule } from './authz/authz.module';
     QueetModule,
     UserModule,
     AuthzModule,
+    ConfigModule.forRoot(),
   ],
   controllers: [AppController],
   providers: [AppService],

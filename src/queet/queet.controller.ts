@@ -1,8 +1,10 @@
-import { Controller, Get, Post } from '@nestjs/common';
+import { Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { Payload } from '@nestjs/microservices';
 import { QueetService } from './queet.service';
 import { PostQueetRequest } from './dto/create-queet.dto';
 import { Observable } from 'rxjs';
+import { AuthzGuard } from 'src/authz/authz.guard';
+import { AddUserId, GetUserByAuth0Token } from 'src/util';
 
 @Controller('queet')
 export class QueetController {
@@ -13,18 +15,23 @@ export class QueetController {
     return this.queetService.create(createQueetDto);
   }
 
+  @UseGuards(AuthzGuard)
   @Get()
-  async findAll() {
+  async findAll(@GetUserByAuth0Token() auth0token: string) {
+    console.log(auth0token);
     return this.queetService.findAll();
   }
 
+  @UseGuards(AuthzGuard)
   @Get(':id')
-  findOne(@Payload() id: number) {
+  findOne(@Payload() id: number, @AddUserId() user: unknown) {
+    console.log(user);
     return this.queetService.findOne(id);
   }
 
+  @UseGuards(AuthzGuard)
   @Get('profile/:id')
-  fetchQueetsByProfile(@Payload() id: number) {
-    return this.queetService.fetchByProfile(id);
+  fetchQueetsByProfile(@Param() params) {
+    return this.queetService.fetchByProfile(params.id);
   }
 }
