@@ -32,10 +32,15 @@ export class UserService {
   }
 
   updateUser(updateUserDto: UpdateUserDto) {
+    this.queetClient.emit('user:update', updateUserDto);
     return this.userClient.emit('user:update', updateUserDto);
   }
 
   fetchUserByUsername(username: string) {
     return this.userClient.send('user:fetch-by-username', username);
+  }
+
+  fetchUserByAuth0token(auth0id: string) {
+    return this.userClient.send('user:fetch-by-auth0', auth0id);
   }
 }

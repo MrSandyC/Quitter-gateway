@@ -21,13 +21,24 @@ export class UserController {
   }
 
   @Get('/check')
-  fetchUserByAuth0(@Payload() auth0token: string) {
+  checkUserByAuth0(@Payload() auth0token: string) {
     console.log(auth0token);
-    return this.userService.checkIfUserExists(auth0token);
+    const user = this.userService.checkIfUserExists(auth0token);
+    try {
+      return user;
+    } catch {
+      return false;
+    }
+  }
+
+  @Post('/byAuth0')
+  fetchUserByAuth0(@Body() body) {
+    return this.userService.fetchUserByAuth0token(body.auth0id);
   }
 
   @Put()
   updateUser(@Payload() updateUserDto: UpdateUserDto) {
+    console.log('got here');
     return this.userService.updateUser(updateUserDto);
   }
 
